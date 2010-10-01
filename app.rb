@@ -11,9 +11,11 @@ get '/' do
     @title = $itunes.current_track
     @artist = $itunes.current_artist
     @album = $itunes.current_album
+
+    haml :index
   end
 
-  haml :index
+  "Itunes must be running"
 end
 
 post '/musicplayer' do
