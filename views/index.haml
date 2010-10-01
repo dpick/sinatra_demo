@@ -1,0 +1,22 @@
+%html
+  %head
+    %title
+      - if @artist
+        = "#{@artist} - #{@album} - #{@title}"
+      - else
+        = @title
+    %meta{'http-equiv' => 'Content-Type', :content => 'text/html; charset=utf-8'}
+    %meta{'http-equiv' => 'Refresh', :content => 10}
+    %link{:rel => 'stylesheet', :href => '/stylesheet.css', :type => 'text/css'}
+  %body
+    %h1= "#{@artist} - #{@album} - #{@title}"
+
+
+    %form{:method => 'post', :action => 'musicplayer'}
+      %p
+        %input{:type=>'submit', :value => '▸', :name=>'playpause', :title => "Play/Pause"}
+        %input{:type=>'submit', :value => '←', :name=>'prev',      :title => "Previous"}
+        %input{:type=>'submit', :value => '→', :name=>'next',      :title => "Next"}
+        %input{:type=>'submit', :value => '-', :name=>'voldown',   :title => "Quieter"}
+        %input{:type=>'submit', :value => '+', :name=>'volup',     :title => "Louder"}
+
