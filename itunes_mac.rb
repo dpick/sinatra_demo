@@ -1,42 +1,38 @@
 class Itunes
   def playpause
-    tell_to 'playpause'
+    do_command 'playpause'
   end
 
   def prev
-    tell_to 'previous track'
+    do_command 'previous track'
   end
 
   def next
-    tell_to 'next track'
+    do_command 'next track'
   end
 
   def voldown
-    tell_to 'set sound volume to sound volume - 10'
+    do_command 'set sound volume to sound volume - 10'
   end
 
   def volup
-    tell_to 'set sound volume to sound volume + 10'
+    do_command 'set sound volume to sound volume + 10'
   end
 
   def volume
-    tell_to 'return sound volume'
+    do_command 'return sound volume'
   end
 
-  def current(name)
-    tell_to "return #{name} of current track"
+  def current(attribute)
+    do_command "return #{attribute} of current track"
   end
 
   def launched?
-    %x(osascript -e 'tell app "System Events" to count (every process whose name is "#{name}")')
-  end
-
-  def name
-    "iTunes"
+    %x(osascript -e 'tell app "System Events" to count (every process whose name is "itunes")')
   end
 
   private
-  def tell_to(command)
-    %x(osascript -e 'tell app "#{name}" to #{command}')
+  def do_command(command)
+    %x(osascript -e 'tell app "itunes" to #{command}')
   end
 end
