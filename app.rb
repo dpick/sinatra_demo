@@ -11,6 +11,6 @@ get '/' do
 end
 
 post '/musicplayer' do
-  params.each { |method, value| $itunes.send(method) if $itunes.respond_to?(method) }
+  params.keys.each { |method| $itunes.send(method) if $itunes.respond_to?(method) }
   redirect '/'
 end
