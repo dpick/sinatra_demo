@@ -2,21 +2,16 @@ require 'rubygems'
 require 'sinatra'
 require 'itunes_mac'
 
-configure do
-  $itunes = Itunes.new
-end
+$itunes = Itunes.new
 
 get '/' do
-  if $itunes.launched?
-    @title = $itunes.current_track
-    @artist = $itunes.current_artist
-    @album = $itunes.current_album
-  end
+  ['name', 'artist', 'album'].each { |name| (eval "@#{name} = $itunes.current(name)") } if $itunes.launched?
 
   haml :index 
 end
 
 post '/musicplayer' do
-  params.each { |k, v| $itunes.send(k) if $itunes.respond_to?(k) }
+  #object.send - calls the passed method
+  params.each { |method, value| $itunes.send(method) if $itunes.respond_to?(method) }
   redirect '/'
 end

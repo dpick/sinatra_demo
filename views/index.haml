@@ -1,16 +1,12 @@
 %html
   %head
     %title
-      - if @artist
-        = "#{@artist} - #{@album} - #{@title}"
-      - else
-        = @title
+      = @name
     %meta{'http-equiv' => 'Content-Type', :content => 'text/html; charset=utf-8'}
     %meta{'http-equiv' => 'Refresh', :content => 10}
     %link{:rel => 'stylesheet', :href => '/stylesheet.css', :type => 'text/css'}
   %body
-    %h1= "#{@artist} - #{@album} - #{@title}"
-
+    %h1= "#{@artist} - #{@album} - #{@name}"
 
     %form{:method => 'post', :action => 'musicplayer'}
       %p

@@ -23,16 +23,8 @@ class Itunes
     tell_to 'return sound volume'
   end
 
-  def current_track
-    tell_to 'return name of current track'
-  end
-
-  def current_artist
-    tell_to 'return (artist of current track)'
-  end
-
-  def current_album
-    tell_to 'return (album of current track)'
+  def current(name)
+    tell_to "return #{name} of current track"
   end
 
   def launched?
