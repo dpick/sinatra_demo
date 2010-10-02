@@ -1,12 +1,9 @@
-require 'rubygems'
-require 'sinatra'
-require 'itunes_mac'
+['rubygems', 'sinatra', 'itunes_mac'].each { |package| require package }
 
 $itunes = Itunes.new
 
 get '/' do
   ['name', 'artist', 'album'].each { |attribute| (eval "@#{attribute} = $itunes.current(attribute)") } if $itunes.launched?
-
   haml :index 
 end
 
