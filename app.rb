@@ -1,10 +1,22 @@
-['rubygems', 'sinatra', 'itunes_mac'].each { |package| require package }
+require 'rubygems'
+require 'sinatra'
+require 'itunes_mac'
 
 $itunes = Itunes.new
 
 get '/' do
-  ['name', 'artist', 'album'].each { |attribute| (eval "@#{attribute} = $itunes.current(attribute)") } if $itunes.launched?
+  @name = $itunes.current('name')
+  @artist = $itunes.current('artist')
+  @album = $itunes.current('album')
+
   haml :index 
+end
+
+get '/:name' do |param|
+  halt "Invalid Parameter #{param}" if not ['name', 'artist', 'album'].include?(param)
+  eval "@#{params[:name]} = $itunes.current('#{params[:name]}')" 
+
+  haml :index
 end
 
 post '/musicplayer' do
